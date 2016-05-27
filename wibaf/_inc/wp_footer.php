@@ -75,7 +75,7 @@ function store_data_on_browser($user_variable) {
         var url = "";
         var feedback = "Times you have accessed this page";
         var domain = "access";
-        if(!key.endsWith("-accessed")) {
+        if(!key.endsWith("_accessed")) {
             var dictVar = wibaf.getInstance().getDictionary().get(key);
             url = dictVar ? dictVar.url : "";
             feedback = dictVar ? dictVar.feedback : "";

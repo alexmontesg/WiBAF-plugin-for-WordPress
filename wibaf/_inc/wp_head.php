@@ -3,9 +3,14 @@
 wp_enqueue_script("jquery");
 add_action('wp_head','hook_adaptation_files');
 
-function file_exists_url($url){
-   $headers = get_headers($url);
-   return stripos($headers[0], "200 OK");
+function file_exists_url($url) {
+    $ch = curl_init($url);    
+    curl_setopt($ch, CURLOPT_NOBODY, true);
+    curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $status = $code == 200;
+    curl_close($ch);
+    return $status;
 }
 
 function get_path_to_adaptation_file($option_name, $default_path) {
